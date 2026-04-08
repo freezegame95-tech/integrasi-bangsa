@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenario Dilemma - Integrasi Bangsa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .option-card { transition: all 0.3s ease; }
+    .option-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgb(30 64 175 / 0.15); }
+    .selected { border-color: #1E40AF; background-color: #EFF6FF; }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-globe-asia text-3xl"></i>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+      </div>
+      <a href="games.html" class="hover:text-yellow-300">← Kembali ke Games</a>
+    </div>
+  </nav>
+
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-[#1E40AF] mb-3">Scenario Dilemma</h1>
+      <p class="text-gray-600 text-lg">Pilih sikap terbaik dalam situasi keberagaman</p>
+      <div class="mt-6 inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow">
+        <span class="text-sm font-medium">Skor Saat Ini:</span>
+        <span id="current-score" class="text-2xl font-bold text-[#1E40AF]">0</span>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl shadow-xl p-10 mb-8">
+      <div class="flex justify-between items-center mb-6">
+        <div class="bg-yellow-100 text-yellow-700 px-5 py-2 rounded-full text-sm font-medium">
+          Skenario <span id="scenario-number">1</span>/3
+        </div>
+      </div>
+      <h2 id="scenario-text" class="text-2xl leading-relaxed text-gray-800 mb-10 min-h-[140px]">Memuat skenario...</h2>
+      <div id="options" class="space-y-4"></div>
+    </div>
+
+    <div id="feedback" class="hidden bg-blue-50 border border-blue-200 rounded-3xl p-8 mb-8">
+      <h3 id="feedback-title" class="font-bold text-xl mb-3 text-[#1E40AF]"></h3>
+      <p id="feedback-text" class="text-gray-700 leading-relaxed"></p>
+    </div>
+
+    <div class="flex justify-center">
+      <button onclick="nextScenario()" id="next-btn" class="hidden bg-[#1E40AF] text-white px-10 py-4 rounded-2xl font-semibold hover:bg-blue-800 transition">
+        Lanjut ke Skenario Berikutnya →
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const scenarios = [
+      {
+        id: 1,
+        text: "Di kelasmu, ada teman yang sering diejek karena berbeda agama. Kamu tahu hal itu salah, tapi takut ikut dibully jika membela dia. Apa yang akan kamu lakukan?",
+        options: [
+          { text: "Diam saja karena takut ikut dibully", score: 25, feedback: "Kurang baik." },
+          { text: "Melaporkan ke guru tanpa menyebut nama", score: 50, feedback: "Cukup baik, tapi masih kurang tegas." },
+          { text: "Membela teman tersebut secara terbuka", score: 100, feedback: "Pilihan yang sangat baik!" },
+          { text: "Ikut-ikutan mengejek", score: 0, feedback: "Sangat tidak baik." }
+        ]
+      },
+      {
+        id: 2,
+        text: "Kamu melihat sekelompok teman menolak bekerja sama dengan siswa dari suku berbeda dalam proyek kelompok.",
+        options: [
+          { text: "Tidak peduli", score: 25, feedback: "Kurang mendukung gotong royong." },
+          { text: "Mencoba membujuk mereka", score: 50, feedback: "Bagus!" },
+          { text: "Melapor ke guru", score: 100, feedback: "Pilihan yang sangat baik." },
+          { text: "Ikut menolak", score: 0, feedback: "Tidak mendukung integrasi." }
+        ]
+      },
+      {
+        id: 3,
+        text: "Di media sosial kamu melihat postingan yang menghasut kebencian antar suku. Apa yang kamu lakukan?",
+        options: [
+          { text: "Like dan share", score: 0, feedback: "Sangat berbahaya." },
+          { text: "Diam saja", score: 25, feedback: "Tidak aktif mendukung persatuan." },
+          { text: "Melaporkan postingan", score: 50, feedback: "Bertanggung jawab." },
+          { text: "Memberi komentar positif", score: 100, feedback: "Pilihan terbaik!" }
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+    let totalScore = 0;
+
+    function loadScenario(index) {
+      const scenario = scenarios[index];
+      document.getElementById('scenario-number').textContent = scenario.id;
+      document.getElementById('scenario-text').textContent = scenario.text;
+
+      const container = document.getElementById('options');
+      container.innerHTML = '';
+
+      scenario.options.forEach(option => {
+        const div = document.createElement('div');
+        div.className = `option-card p-6 border-2 border-transparent rounded-2xl cursor-pointer bg-white hover:border-[#1E40AF]`;
+        div.innerHTML = `<p class="text-lg">${option.text}</p>`;
+        div.onclick = () => selectOption(option, div);
+        container.appendChild(div);
+      });
+
+      document.getElementById('feedback').classList.add('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+    }
+
+    function selectOption(option, element) {
+      document.querySelectorAll('.option-card').forEach(el => el.style.pointerEvents = 'none');
+      element.classList.add('selected');
+
+      totalScore += option.score;
+      document.getElementById('current-score').textContent = totalScore;
+
+      const fb = document.getElementById('feedback');
+      document.getElementById('feedback-title').innerHTML = `Feedback: <span class="text-green-600">${option.score} poin</span>`;
+      document.getElementById('feedback-text').textContent = option.feedback;
+      fb.classList.remove('hidden');
+
+      document.getElementById('next-btn').classList.remove('hidden');
+    }
+
+    function nextScenario() {
+      currentIndex++;
+      if (currentIndex < scenarios.length) {
+        loadScenario(currentIndex);
+      } else {
+        alert(`Game Selesai!\n\nSkor Total: ${totalScore} poin\n\nTerima kasih telah bermain!`);
+        totalScore = 0;
+        currentIndex = 0;
+        document.getElementById('current-score').textContent = "0";
+        loadScenario(0);
+      }
+    }
+
+    window.onload = () => loadScenario(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Card Game - Integrasi Bangsa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .memory-card {
+      width: 110px;
+      height: 110px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .memory-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      transform-style: preserve-3d;
+    }
+    .memory-card.flipped .memory-card-inner {
+      transform: rotateY(180deg);
+    }
+    .memory-card-front, .memory-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    }
+    .memory-card-front {
+      background: linear-gradient(135deg, #1E40AF, #3B82F6);
+      color: white;
+      font-size: 2.8rem;
+    }
+    .memory-card-back {
+      background: white;
+      border: 4px solid #1E40AF;
+      transform: rotateY(180deg);
+      font-size: 3.5rem;
+    }
+    .matched {
+      opacity: 0.85;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-globe-asia text-3xl"></i>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+      </div>
+      <a href="games.html" class="hover:text-yellow-300">← Kembali ke Games</a>
+    </div>
+  </nav>
+
+  <div class="max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold text-[#1E40AF] mb-3">Memory Card Game</h1>
+      <p class="text-gray-600 text-lg">Pasangkan kartu keberagaman Indonesia!</p>
+      <div class="mt-8 flex justify-center gap-10 text-sm font-medium">
+        <div>Skor: <span id="score" class="text-[#1E40AF] font-bold text-xl">0</span></div>
+        <div>Waktu: <span id="timer" class="text-[#1E40AF] font-bold text-xl">60</span>s</div>
+        <div>Pasangan: <span id="pairs" class="text-[#1E40AF] font-bold text-xl">0</span>/8</div>
+      </div>
+    </div>
+
+    <div id="game-board" class="grid grid-cols-4 gap-5 max-w-[480px] mx-auto"></div>
+
+    <div class="flex justify-center gap-4 mt-12">
+      <button onclick="startNewGame()" class="bg-[#1E40AF] hover:bg-blue-800 text-white px-8 py-4 rounded-2xl font-semibold transition">
+        Main Lagi
+      </button>
+      <button onclick="window.location.href='games.html'" class="bg-gray-700 hover:bg-gray-800 text-white px-8 py-4 rounded-2xl font-semibold transition">
+        Kembali ke Daftar Games
+      </button>
+    </div>
+  </div>
+
+  <!-- Win Modal -->
+  <div id="win-modal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+    <div class="bg-white rounded-3xl p-10 text-center max-w-sm mx-4">
+      <div class="text-6xl mb-4">🎉</div>
+      <h2 class="text-4xl font-bold text-green-600 mb-2">Selamat!</h2>
+      <p class="text-xl text-gray-700 mb-6">Kamu berhasil menyelesaikan Memory Game</p>
+      <p class="text-3xl font-bold text-[#1E40AF] mb-8">Skor Akhir: <span id="final-score">0</span></p>
+      <div class="flex gap-4 justify-center">
+        <button onclick="startNewGame(); closeModal()" class="bg-[#1E40AF] text-white px-8 py-4 rounded-2xl font-semibold">Main Lagi</button>
+        <button onclick="window.location.href='games.html'" class="bg-gray-200 text-gray-800 px-8 py-4 rounded-2xl font-semibold">Kembali</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cardData = [
+      { id: 1, emoji: "🇮🇩", name: "Bendera" },
+      { id: 2, emoji: "🕌", name: "Masjid" },
+      { id: 3, emoji: "⛪", name: "Gereja" },
+      { id: 4, emoji: "🛕", name: "Pura" },
+      { id: 5, emoji: "🌴", name: "Kelapa" },
+      { id: 6, emoji: "🍛", name: "Nasi Padang" },
+      { id: 7, emoji: "🎭", name: "Tari" },
+      { id: 8, emoji: "🤝", name: "Gotong Royong" }
+    ];
+
+    let gameCards = [];
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let score = 0;
+    let timerInterval;
+    let timeLeft = 60;
+
+    function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+
+    function createBoard() {
+      const board = document.getElementById('game-board');
+      board.innerHTML = '';
+      gameCards.forEach((card, index) => {
+        const cardEl = document.createElement('div');
+        cardEl.className = `memory-card`;
+        cardEl.dataset.index = index;
+        cardEl.innerHTML = `
+          <div class="memory-card-inner">
+            <div class="memory-card-front">?</div>
+            <div class="memory-card-back">${card.emoji}</div>
+          </div>
+        `;
+        cardEl.addEventListener('click', () => flipCard(cardEl, index));
+        board.appendChild(cardEl);
+      });
+    }
+
+    function flipCard(cardElement, index) {
+      if (flippedCards.length >= 2 || cardElement.classList.contains('flipped') || cardElement.classList.contains('matched')) return;
+      cardElement.classList.add('flipped');
+      flippedCards.push({ element: cardElement, index });
+
+      if (flippedCards.length === 2) checkForMatch();
+    }
+
+    function checkForMatch() {
+      const [card1, card2] = flippedCards;
+      if (gameCards[card1.index].id === gameCards[card2.index].id) {
+        card1.element.classList.add('matched');
+        card2.element.classList.add('matched');
+        matchedPairs++;
+        score += 12.5;
+        document.getElementById('score').textContent = score;
+        document.getElementById('pairs').textContent = matchedPairs;
+        if (matchedPairs === 8) setTimeout(showWinModal, 500);
+      } else {
+        setTimeout(() => {
+          card1.element.classList.remove('flipped');
+          card2.element.classList.remove('flipped');
+        }, 900);
+      }
+      flippedCards = [];
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timeLeft = 60;
+      document.getElementById('timer').textContent = timeLeft;
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          alert("Waktu habis! Skor kamu: " + score);
+          startNewGame();
+        }
+      }, 1000);
+    }
+
+    function startNewGame() {
+      gameCards = shuffle([...cardData, ...cardData]);
+      matchedPairs = 0;
+      score = 0;
+      flippedCards = [];
+      document.getElementById('score').textContent = score;
+      document.getElementById('pairs').textContent = "0";
+      createBoard();
+      startTimer();
+      closeModal();
+    }
+
+    function showWinModal() {
+      clearInterval(timerInterval);
+      document.getElementById('final-score').textContent = score;
+      document.getElementById('win-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('win-modal').classList.add('hidden');
+    }
+
+    window.onload = startNewGame;
+  </script>
+</body>
+</html>

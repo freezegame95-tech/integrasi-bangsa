@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Game - Integrasi Bangsa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .sortable-item {
+      transition: all 0.3s ease;
+      cursor: grab;
+    }
+    .sortable-item:active {
+      cursor: grabbing;
+      transform: scale(1.05);
+    }
+    .drop-zone {
+      transition: all 0.3s ease;
+      min-height: 85px;
+    }
+    .drop-zone.correct {
+      border-color: #10b981 !important;
+      background-color: #ecfdf5 !important;
+    }
+    .drop-zone.incorrect {
+      border-color: #eab308 !important;
+      background-color: #fefce8 !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <i class="fas fa-globe-asia text-3xl"></i>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+      </div>
+      <a href="games.html" class="hover:text-yellow-300 transition">← Kembali ke Games</a>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-[#1E40AF] mb-4">Sorting Game</h1>
+      <p class="text-gray-600 text-lg">Urutkan perilaku berikut dari yang **paling mendukung** integrasi hingga yang **paling merusak**.</p>
+    </div>
+
+    <!-- Score -->
+    <div class="flex justify-center mb-10">
+      <div class="bg-white px-10 py-4 rounded-3xl shadow flex items-center gap-12 text-lg">
+        <div>Skor: <span id="score" class="font-bold text-[#1E40AF]">0</span>/100</div>
+        <div>Benar: <span id="correct-count" class="font-bold text-green-600">0</span>/5</div>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div id="items" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12"></div>
+
+    <!-- Drop Zones dengan Indikator Peringkat -->
+    <div class="space-y-6">
+      <div class="text-center text-sm font-medium text-gray-500 mb-4">Seret item ke kotak peringkat (1 = Paling Baik, 5 = Paling Buruk)</div>
+      
+      <div id="drop-zones" class="space-y-5"></div>
+    </div>
+
+    <div class="flex justify-center gap-4 mt-12">
+      <button onclick="checkAnswer()" 
+              class="bg-[#1E40AF] hover:bg-blue-800 text-white px-10 py-4 rounded-2xl font-semibold transition">
+        Cek Jawaban
+      </button>
+      <button onclick="resetGame()" 
+              class="bg-gray-700 hover:bg-gray-800 text-white px-10 py-4 rounded-2xl font-semibold transition">
+        Main Lagi
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const behaviors = [
+      { id: 1, text: "Membela teman yang di-bully meski berbeda agama", rank: 1 },
+      { id: 2, text: "Aktif mengajak gotong royong antar suku dalam kegiatan sekolah", rank: 2 },
+      { id: 3, text: "Menghargai pendapat teman yang berbeda budaya", rank: 3 },
+      { id: 4, text: "Diam saja saat melihat ujaran kebencian di media sosial", rank: 4 },
+      { id: 5, text: "Ikut menyebarkan berita bohong yang memprovokasi antar kelompok", rank: 5 }
+    ];
+
+    let currentOrder = [];
+    let score = 0;
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function createItems() {
+      const container = document.getElementById('items');
+      container.innerHTML = '';
+      currentOrder = shuffle([...behaviors]);
+
+      currentOrder.forEach(item => {
+        const div = document.createElement('div');
+        div.className = `sortable-item bg-white p-6 rounded-2xl shadow border border-gray-200 text-lg`;
+        div.draggable = true;
+        div.dataset.id = item.id;
+        div.textContent = item.text;
+        div.addEventListener('dragstart', dragStart);
+        container.appendChild(div);
+      });
+    }
+
+    function createDropZones() {
+      const container = document.getElementById('drop-zones');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= 5; i++) {
+        const zone = document.createElement('div');
+        zone.className = `drop-zone border-2 border-dashed border-gray-300 rounded-3xl p-6 flex items-center gap-4`;
+        zone.dataset.rank = i;
+        
+        zone.innerHTML = `
+          <div class="w-10 h-10 bg-[#1E40AF] text-white rounded-2xl flex items-center justify-center font-bold text-xl flex-shrink-0">
+            ${i}
+          </div>
+          <div class="flex-1 text-gray-600">Peringkat ${i} ${i === 1 ? '(Paling Baik)' : i === 5 ? '(Paling Buruk)' : ''}</div>
+        `;
+
+        zone.addEventListener('dragover', dragOver);
+        zone.addEventListener('dragleave', dragLeave);
+        zone.addEventListener('drop', drop);
+        container.appendChild(zone);
+      }
+    }
+
+    function dragStart(e) {
+      e.dataTransfer.setData('text/plain', e.target.dataset.id);
+      e.target.classList.add('opacity-60');
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+      e.currentTarget.classList.add('border-blue-400', 'bg-blue-50');
+    }
+
+    function dragLeave(e) {
+      e.currentTarget.classList.remove('border-blue-400', 'bg-blue-50');
+    }
+
+    function drop(e) {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain');
+      const item = document.querySelector(`[data-id="${id}"]`);
+      
+      if (item) {
+        // Hapus dari posisi lama jika ada
+        if (item.parentNode.id === 'items') {
+          item.remove();
+        } else {
+          // Jika sudah di drop zone, hapus dulu
+          item.parentNode.innerHTML = `
+            <div class="w-10 h-10 bg-[#1E40AF] text-white rounded-2xl flex items-center justify-center font-bold text-xl flex-shrink-0">
+              ${item.parentNode.dataset.rank}
+            </div>
+            <div class="flex-1 text-gray-600">Peringkat ${item.parentNode.dataset.rank}</div>
+          `;
+        }
+
+        // Masukkan item ke drop zone
+        e.currentTarget.innerHTML = '';
+        e.currentTarget.appendChild(item);
+      }
+      
+      e.currentTarget.classList.remove('border-blue-400', 'bg-blue-50');
+    }
+
+    function checkAnswer() {
+      let correctCount = 0;
+      const zones = document.querySelectorAll('.drop-zone');
+
+      zones.forEach(zone => {
+        const item = zone.querySelector('.sortable-item');
+        if (item) {
+          const itemId = parseInt(item.dataset.id);
+          const expectedRank = parseInt(zone.dataset.rank);
+          const actualItem = behaviors.find(b => b.id === itemId);
+
+          if (actualItem && actualItem.rank === expectedRank) {
+            correctCount++;
+            zone.classList.add('correct');
+            zone.classList.remove('incorrect');
+          } else {
+            zone.classList.add('incorrect');
+            zone.classList.remove('correct');
+          }
+        }
+      });
+
+      score = Math.round((correctCount / 5) * 100);
+      document.getElementById('score').textContent = score;
+      document.getElementById('correct-count').textContent = correctCount;
+
+      let message = correctCount === 5 
+        ? "🎉 Sempurna! Pemahamanmu tentang integrasi sangat luar biasa!"
+        : correctCount >= 3 
+        ? "👍 Bagus! Kamu sudah cukup memahami prioritas perilaku integrasi."
+        : "Terima kasih telah mencoba. Mari pelajari lagi tentang perilaku yang mendukung integrasi bangsa.";
+
+      setTimeout(() => {
+        alert(`Skor: ${score}/100\nBenar: ${correctCount}/5\n\n${message}`);
+      }, 400);
+    }
+
+    function resetGame() {
+      score = 0;
+      document.getElementById('score').textContent = "0";
+      document.getElementById('correct-count').textContent = "0";
+      createItems();
+      createDropZones();
+    }
+
+    // Inisialisasi Game
+    window.onload = () => {
+      createItems();
+      createDropZones();
+    };
+  </script>
+</body>
+</html>

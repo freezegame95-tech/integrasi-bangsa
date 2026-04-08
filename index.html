@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integrasi Bangsa • Bersatu dalam Keberagaman</title>
+  
+  <!-- Favicon / Logo di Tab Browser -->
+  <link rel="icon" type="image/png" href="logobiru.png">
+  <link rel="apple-touch-icon" href="logobiru.png">
+  
+  <!-- Optional: Untuk ukuran berbeda (lebih optimal) -->
+  <!-- 
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+</head>
+  <style>
+    .hero-bg {
+      background: linear-gradient(rgba(30, 64, 175, 0.8), rgba(30, 64, 175, 0.9)),
+        url('https://source.unsplash.com/random/1920x1080/?indonesia') center/cover no-repeat;
+    }
+
+    .typing-dots span {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background-color: #64748b;
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingBounce {
+
+      0%,
+      80%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(-6px);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+ 
+  <!-- Navbar -->
+<nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <!-- Logo Raudlatul Jannah-->
+      <img src="logobiru.png" alt="Jaguar House Biru" 
+           class="h-12 w-auto object-contain">
+      
+      <div>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+        <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="hidden md:flex gap-8 text-lg">
+      <a href="#penjelasan" class="hover:text-yellow-300 transition">Penjelasan</a>
+      <a href="#quiz" class="hover:text-yellow-300 transition">Quiz</a>
+      <a href="games.html" class="hover:text-yellow-300 transition">Games</a>
+      <a href="#video" class="hover:text-yellow-300 transition">Video</a>
+      <a href="#saran" class="hover:text-yellow-300 transition">Kotak Saran</a>
+    </div>
+
+    <button onclick="toggleChat()" 
+            class="bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
+      <i class="fas fa-robot"></i> Diskusi AI
+    </button>
+  </div>
+</nav>
+
+  <!-- Hero -->
+  <section class="hero-bg h-screen flex items-center text-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        Integrasi Bangsa dan <span class="text-yellow-300">Integrasi Sosial</span>
+      </h2>
+      <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">
+        Mari kita bersama-sama memahami bagaimana perbedaan yang ada di Indonesia dapat menjadi kekuatan besar melalui
+        proses integrasi yang harmonis.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#penjelasan"
+          class="inline-block bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] font-bold text-xl px-10 py-4 rounded-2xl transition">
+          Pelajari Lebih Dalam
+        </a>
+        <a href="games.html"
+          class="inline-block bg-white hover:bg-gray-100 text-[#1E40AF] font-bold text-xl px-10 py-4 rounded-2xl transition">
+          Jelajahi Games
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Penjelasan -->
+<section id="penjelasan" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-[#1E40AF] mb-4">Apa Itu Integrasi Bangsa dan Integrasi Sosial?</h2>
+      <div class="w-28 h-1 bg-yellow-400 mx-auto"></div>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-16">
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-3xl font-semibold mb-6 text-[#1E40AF] flex items-center gap-3">
+            <i class="fas fa-flag"></i> Integrasi Bangsa
+          </h3>
+          <p class="text-lg leading-relaxed text-gray-700">
+            Pernahkah Anda membayangkan bagaimana sebuah negara yang terdiri dari ribuan pulau, ratusan suku, bahasa, dan agama dapat tetap bersatu? 
+            <strong>Integrasi bangsa</strong> adalah proses penyatuan berbagai kelompok sosial dan budaya ke dalam satu kesatuan wilayah serta identitas nasional yang kuat.
+          </p>
+          <p class="text-lg leading-relaxed text-gray-700 mt-6">
+            Proses ini bukan hanya tentang menyatukan wilayah secara fisik, tetapi juga membangun rasa memiliki bersama. 
+            Melalui integrasi bangsa, kita belajar untuk melihat perbedaan bukan sebagai ancaman, melainkan sebagai kekayaan yang memperkuat persatuan.
+          </p>
+        </div>
+
+      
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-3xl font-semibold mb-6 text-[#1E40AF] flex items-center gap-3">
+            <i class="fas fa-users"></i> Integrasi Sosial
+          </h3>
+          <p class="text-lg leading-relaxed text-gray-700">
+            Integrasi sosial adalah penyesuaian antar unsur-unsur yang berbeda dalam masyarakat—ras, etnis, agama, budaya, dan status sosial—sehingga tercipta kehidupan yang serasi, damai, dan saling menghargai.
+          </p>
+          <p class="text-lg leading-relaxed text-gray-700 mt-6">
+            Bayangkan jika setiap warga saling menghormati perbedaan, mendukung satu sama lain, dan bekerja sama untuk tujuan bersama. 
+            Itulah wujud nyata integrasi sosial yang berhasil. Pancasila sebagai ideologi negara menjadi perekat utama dalam proses ini.
+          </p>
+        </div>
+
+        <!-- Tombol ke Artikel -->
+        <div class="pt-6">
+          <a href="article.html" 
+             class="inline-flex items-center gap-3 bg-[#1E40AF] hover:bg-blue-800 text-white px-8 py-4 rounded-2xl font-semibold transition">
+            <i class="fas fa-book-open"></i>
+            Baca Artikel Lengkap tentang Integrasi Sosial
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Quiz Section -->
+  <section id="quiz" class="py-20 bg-gray-100">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-[#1E40AF] mb-4">Tes Pemahaman Integrasi</h2>
+        <p class="text-gray-600">Seberapa baik Anda memahami arti integrasi bangsa dan sosial?</p>
+      </div>
+
+      <!-- Layar Awal -->
+      <div id="quiz-start" class="bg-white rounded-3xl shadow-xl p-16 text-center">
+        <i class="fas fa-brain text-7xl text-[#1E40AF] mb-6"></i>
+        <h3 class="text-3xl font-bold text-gray-800 mb-4">Siap Menguji Pengetahuanmu?</h3>
+        <p class="text-gray-600 mb-10">Jawab 10 pertanyaan tentang Integrasi Bangsa dan Integrasi Sosial</p>
+        <button onclick="startQuiz()"
+          class="bg-[#1E40AF] hover:bg-blue-800 text-white px-12 py-5 rounded-2xl font-bold text-xl transition">
+          MULAI QUIZ SEKARANG
+        </button>
+      </div>
+
+      <!-- Quiz Container -->
+      <div id="quiz-container" class="hidden bg-white rounded-3xl shadow-xl p-10">
+        <div class="flex justify-between items-center mb-6">
+          <div id="progress" class="text-sm font-medium text-gray-500"></div>
+          <div id="question-number" class="text-sm text-[#1E40AF] font-semibold"></div>
+        </div>
+        <div id="question" class="text-2xl font-semibold mb-10 text-gray-800"></div>
+        <div id="options" class="grid gap-4"></div>
+        <button onclick="nextQuestion()" id="next-btn"
+          class="mt-10 w-full hidden bg-[#1E40AF] hover:bg-blue-800 text-white py-4 rounded-2xl font-semibold text-lg transition">
+          Lanjut ke Pertanyaan Berikutnya →
+        </button>
+      </div>
+
+      <!-- Hasil -->
+      <div id="result" class="hidden text-center mt-10">
+        <h3 class="text-3xl font-bold mb-4 text-[#1E40AF]">Hasil Skor Anda</h3>
+        <div id="score" class="text-7xl font-bold text-yellow-400 mb-6"></div>
+        <p id="feedback" class="text-xl text-gray-700"></p>
+        <button onclick="restartQuiz()"
+          class="mt-8 bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-10 py-4 rounded-2xl font-bold text-lg">
+          Coba Quiz Lagi
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="video" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-bold text-[#1E40AF] mb-8">Video Edukasi</h2>
+      <div class="aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl">
+        <iframe width="100%" height="100%" 
+                src="https://www.youtube.com/embed/dQw4w9wgxcq" 
+                frameborder="0" 
+                allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kotak Saran yang Diperbarui -->
+  <section id="saran" class="py-20 bg-[#1E40AF] text-white">
+    <div class="max-w-2xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold">Kotak Saran</h2>
+        <p class="text-blue-200 mt-3">Bagaimana menurut Anda kita dapat memperkuat integrasi bangsa?</p>
+      </div>
+
+      <form id="saran-form" class="space-y-6">
+        <input type="text" id="nama" placeholder="Nama (opsional)" 
+               class="w-full bg-white/10 border border-white/30 rounded-2xl px-6 py-4 text-white placeholder:text-white/60">
+        <textarea id="pesan" rows="5" placeholder="Masukkan saran atau masukan Anda..." required
+                  class="w-full bg-white/10 border border-white/30 rounded-3xl px-6 py-4 text-white placeholder:text-white/60 resize-none"></textarea>
+        <button type="submit" class="w-full bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] py-5 rounded-2xl font-bold text-lg transition">
+          Kirim Saran
+        </button>
+      </form>
+
+      <div class="mt-12">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-semibold">Saran yang Telah Dikirim</h3>
+          <button onclick="clearAllSaran()" class="text-red-400 hover:text-red-600 text-sm flex items-center gap-1">
+            <i class="fas fa-trash"></i> Hapus Semua
+          </button>
+        </div>
+        <div id="saran-list" class="space-y-4 max-h-96 overflow-y-auto"></div>
+      </div>
+    </div>
+  </section>
+  
+
+  <
+  <!-- Chat Window dengan Tombol Back -->
+  <div id="chat-window" class="hidden fixed bottom-28 right-8 w-96 bg-white rounded-3xl shadow-2xl overflow-hidden z-50">
+    <div class="bg-[#1E40AF] p-5 text-white flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <button onclick="toggleChat()" class="hover:bg-blue-700 p-2 rounded-xl transition">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="flex items-center gap-3">
+         <i class="fas fa-robot text-2xl"></i>
+          <div>
+            <p class="font-semibold">AI Tutor Integrasi</p>
+            <p class="text-xs opacity-75">Siap berdiskusi</p>
+          </div>
+       </div>
+     </div>
+      <i onclick="toggleChat()" class="fas fa-times cursor-pointer text-xl hover:text-gray-200"></i>
+    </div>
+  
+   <div id="chat-messages" class="h-96 p-5 overflow-y-auto bg-gray-50 space-y-4"></div>
+  
+  <!-- Typing Indicator -->
+    <div id="typing-indicator" class="hidden px-5 py-3 bg-white border-t">
+     <div class="flex items-center gap-3">
+       <div class="w-6 h-6 bg-[#1E40AF] rounded-full flex items-center justify-center">
+          <i class="fas fa-robot text-white text-xs"></i>
+        </div>
+        <div class="typing-dots flex gap-1">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+        <span class="text-xs text-gray-500">AI Tutor sedang mengetik...</span>
+      </div>
+    </div>
+  
+   <div class="p-4 border-t bg-white">
+     <div class="flex gap-2">
+        <input id="chat-input" type="text" placeholder="Tanyakan apa saja..." 
+               class="flex-1 border border-gray-300 rounded-2xl px-5 py-3 focus:outline-none focus:border-[#1E40AF]"
+               onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()" 
+                class="bg-[#1E40AF] text-white px-8 rounded-2xl hover:bg-blue-800 transition">Kirim</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
