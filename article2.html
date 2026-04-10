@@ -3,132 +3,481 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kedaulatan Ekonomi dalam Genggaman: Bersatu Menjaga Stabilitas Harga</title>
+  <title>Stabilitas Ekonomi & Integrasi Bangsa — Artikel Lengkap</title>
+  <link rel="icon" type="image/png" href="logobiru.png">
+  <link rel="apple-touch-icon" href="logobiru.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" type="image/png" href="logobiru.png">
-
   <style>
-    .hero-bg {
-      background: linear-gradient(rgba(30,64,175,0.85), rgba(30,64,175,0.9)), 
-                  url('https://source.unsplash.com/random/1920x1080/?economy,indonesia') center/cover no-repeat;
+    html { scroll-behavior: smooth; }
+
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: #10b981;
+      width: 0%;
+      z-index: 9999;
+      transition: width .1s linear;
+      border-radius: 0 4px 4px 0;
     }
-    .article-content p {
-      line-height: 1.8;
+
+    /* Fade-up on load */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-    .highlight {
-      background: linear-gradient(transparent 60%, #fde047 60%);
+    .fade-up { animation: fadeUp .6s ease both; }
+    .fade-up-2 { animation: fadeUp .6s .15s ease both; }
+    .fade-up-3 { animation: fadeUp .6s .3s ease both; }
+
+    /* Section reveal via IntersectionObserver */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* Hover lift cards */
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(16,185,129,.15); }
+
+    /* List item hover */
+    .list-item { transition: border-color .2s, transform .2s; }
+    .list-item:hover { border-left-color: #10b981; transform: translateX(4px); }
+
+    /* TOC link */
+    .toc-link { transition: color .15s, padding-left .15s; }
+    .toc-link:hover { color: #10b981; padding-left: 6px; }
+
+    /* Sticky TOC sidebar */
+    @media (min-width: 1024px) {
+      .sidebar { position: sticky; top: 88px; }
     }
+
+    /* Gradient accent */
+    .gradient-text { background: linear-gradient(135deg, #10b981 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   </style>
 </head>
 <body class="bg-gray-50 font-sans">
 
-  <!-- Navbar -->
-  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
-        <div>
-          <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
-          <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
-        </div>
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- ═══════════════════════ NAVBAR ═══════════════════════ -->
+<nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
+      <div>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+        <p class="text-xs -mt-1 text-emerald-300">Harmoni dalam Keberagaman</p>
       </div>
-      <a href="index.html" class="bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
-        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
-      </a>
     </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero-bg h-[460px] flex items-center text-white">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <span class="inline-block bg-yellow-300 text-[#1E40AF] text-xs font-bold uppercase tracking-widest px-5 py-2 rounded-full mb-6">
-        EKONOMI • INTEGRASI BANGSA
-      </span>
-      <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-        Kedaulatan Ekonomi dalam Genggaman:<br>
-        <span class="text-yellow-300">Bersatu Menjaga Stabilitas Harga</span>
-      </h1>
-      <p class="mt-8 text-blue-100 text-lg">Literasi Ekonomi sebagai Perekat Persatuan Nasional</p>
+    <div class="hidden md:flex gap-8 text-lg">
+      <a href="index.html#penjelasan" class="hover:text-emerald-300 transition">Penjelasan</a>
+      <a href="index.html#quiz"       class="hover:text-emerald-300 transition">Quiz</a>
+      <a href="games.html"            class="hover:text-emerald-300 transition">Games</a>
+      <a href="index.html#video"      class="hover:text-emerald-300 transition">Video</a>
+      <a href="index.html#saran"      class="hover:text-emerald-300 transition">Kotak Saran</a>
     </div>
-  </section>
+    <a href="index.html"
+       class="bg-emerald-400 hover:bg-emerald-500 text-[#1E40AF] px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
+      <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+  </div>
+</nav>
 
-  <!-- Article Content -->
-  <div class="max-w-4xl mx-auto px-6 py-16 prose prose-lg text-gray-700 leading-relaxed">
-    
-    <h2 class="text-3xl font-bold text-[#1E40AF] mt-12 mb-6">Pendahuluan</h2>
-    <p>
-      Integrasi bangsa merupakan fondasi utama kedaulatan negara yang tidak hanya berpijak pada aspek sosial-politik, 
-      tetapi juga sangat bergantung pada ketahanan dan stabilitas ekonomi nasional. Relevansi tema ekonomi dalam 
-      kampanye integrasi bangsa menjadi krusial karena pemahaman kolektif mengenai konsep uang, peredaran uang, 
-      inflasi, dan kebijakan moneter berfungsi sebagai "perekat" yang membangun kepercayaan publik terhadap negara 
-      serta meminimalisir risiko disintegrasi akibat ketimpangan informasi ekonomi.
-    </p>
-    <p>
-      Ketika setiap warga negara memahami bahwa Rupiah adalah simbol kedaulatan dan stabilitas harga adalah 
-      kepentingan bersama, maka akan tercipta rasa senasib sepenanggungan yang mampu menangkal provokasi serta 
-      keresahan sosial. Dengan demikian, literasi ekonomi bukan sekadar edukasi finansial, melainkan strategi 
-      strategis untuk memperkokoh persatuan melalui pemahaman bahwa kesejahteraan setiap individu saling terikat 
-      dalam satu sistem moneter yang kuat dan terintegrasi di bawah naungan NKRI.
-    </p>
+<!-- ═══════════════════════ HERO BANNER ═══════════════════════ -->
+<section class="bg-gradient-to-r from-[#1E40AF] to-emerald-600 text-white py-20 px-6 relative overflow-hidden">
+  <!-- Decorative circles -->
+  <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/5 pointer-events-none"></div>
+  <div class="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-emerald-400/10 pointer-events-none"></div>
 
-    <h2 class="text-3xl font-bold text-[#1E40AF] mt-16 mb-6">Pembahasan</h2>
-
-    <h3 class="text-2xl font-semibold text-[#1E40AF] mt-10 mb-4">1. Konsep Uang</h3>
-    <p>
-      Konsep uang merupakan fondasi dari seluruh aktivitas ekonomi modern yang berfungsi sebagai alat tukar sah, 
-      satuan hitung untuk menentukan nilai barang, serta sarana penyimpan nilai kekayaan. Di Indonesia, uang bukan 
-      sekadar kertas atau angka digital, melainkan simbol kedaulatan negara yang menyatukan transaksi dari Sabang 
-      hingga Merauke.
-    </p>
-
-    <h3 class="text-2xl font-semibold text-[#1E40AF] mt-10 mb-4">2. Peredaran Uang</h3>
-    <p>
-      Peredaran uang mencakup seluruh jumlah uang kartal dan giral yang berada di tangan masyarakat serta digunakan 
-      dalam kegiatan ekonomi. Pengaturan jumlah uang yang beredar harus dilakukan dengan sangat hati-hati oleh 
-      otoritas moneter. Distribusi peredaran uang yang merata ke seluruh pelosok negeri sangat penting untuk 
-      memastikan pertumbuhan ekonomi tidak hanya berpusat di satu wilayah.
-    </p>
-
-    <h3 class="text-2xl font-semibold text-[#1E40AF] mt-10 mb-4">3. Inflasi</h3>
-    <p>
-      Inflasi adalah fenomena kenaikan harga barang dan jasa secara umum dan terus-menerus yang mengakibatkan 
-      penurunan daya beli mata uang. Inflasi yang rendah dan stabil adalah indikator ekonomi yang sehat. Memahami 
-      inflasi membantu masyarakat untuk lebih bijak dalam berkonsumsi dan berinvestasi, serta mencegah kepanikan 
-      massal yang sering kali menjadi pemicu keretakan stabilitas nasional.
-    </p>
-
-    <h3 class="text-2xl font-semibold text-[#1E40AF] mt-10 mb-4">4. Kebijakan Moneter</h3>
-    <p>
-      Kebijakan moneter adalah serangkaian tindakan yang diambil oleh Bank Indonesia untuk menjaga stabilitas nilai 
-      Rupiah melalui pengaturan jumlah uang beredar dan tingkat suku bunga. Kebijakan moneter yang kredibel memberikan 
-      kepastian bagi pelaku usaha dan masyarakat, yang pada akhirnya menciptakan lingkungan ekonomi yang kondusif 
-      bagi kemajuan bangsa.
-    </p>
-
-    <h2 class="text-3xl font-bold text-[#1E40AF] mt-16 mb-6">Kesimpulan</h2>
-    <p class="text-lg leading-relaxed">
-      Integrasi bangsa Indonesia secara fundamental bergantung pada literasi dan stabilitas ekonomi. Pemahaman 
-      masyarakat terhadap konsep uang, pengendalian peredaran uang, manajemen inflasi, serta kebijakan moneter 
-      yang efektif menjadi pilar utama dalam menjaga kepercayaan publik terhadap negara. 
-    </p>
-    <p class="text-lg leading-relaxed mt-4">
-      Oleh karena itu, pemerintah dan otoritas moneter perlu terus memperkuat edukasi literasi ekonomi di seluruh 
-      lapisan masyarakat untuk membangun rasa senasib sepenanggungan dan memperkokoh persatuan NKRI.
-    </p>
-
-    <div class="mt-16 flex justify-center">
-      <a href="index.html" 
-         class="inline-flex items-center gap-3 bg-[#1E40AF] hover:bg-blue-800 text-white px-10 py-5 rounded-2xl font-semibold transition">
-        <i class="fas fa-arrow-left"></i>
-        Kembali ke Beranda
-      </a>
+  <div class="max-w-4xl mx-auto text-center relative fade-up">
+    <span class="inline-block bg-emerald-400 text-[#1E40AF] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 fade-up">
+      Artikel Ilmiah · Ekonomi & Sosiologi
+    </span>
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6 fade-up-2">
+      Stabilitas Ekonomi sebagai<br>
+      <span class="text-emerald-300">Fondasi Integrasi Bangsa</span>
+    </h1>
+    <div class="flex justify-center gap-6 text-sm text-blue-200 flex-wrap fade-up-3">
+      <span class="flex items-center gap-2"><i class="fas fa-chart-line"></i> Ekonomi Nasional</span>
+      <span class="flex items-center gap-2"><i class="fas fa-handshake"></i> Integrasi Sosial</span>
+      <span class="flex items-center gap-2"><i class="fas fa-clock"></i> ±8 menit baca</span>
     </div>
   </div>
+</section>
 
-  <footer class="bg-black text-white py-12 text-center">
-    <p>© 2026 Integrasi Bangsa • Artikel Edukasi</p>
-  </footer>
+<!-- ═══════════════════════ MAIN LAYOUT ═══════════════════════ -->
+<div class="max-w-7xl mx-auto px-6 py-12 lg:grid lg:grid-cols-[260px_1fr] lg:gap-12 lg:items-start">
 
+  <!-- ── SIDEBAR TOC ── -->
+  <aside class="sidebar mb-10 lg:mb-0">
+    <div class="bg-white rounded-3xl shadow-md p-6 border border-gray-100">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-600 mb-4 flex items-center gap-2">
+        <i class="fas fa-list"></i> Daftar Isi
+      </h2>
+      <nav class="space-y-1 text-sm">
+        <a href="#pengertian"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">A. Pengertian</a>
+        <a href="#pilar"       class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">B. Empat Pilar Ekonomi</a>
+        <a href="#kaitan"      class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">C. Kaitan dengan Integrasi</a>
+        <a href="#dampak"      class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">D. Dampak Konkret</a>
+        <a href="#stabilitas"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">E. Menjaga Stabilitas</a>
+        <a href="#peran"       class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">F. Peran Masyarakat</a>
+        <a href="#kesimpulan"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">G. Kesimpulan</a>
+        <a href="#referensi"   class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">Daftar Pustaka</a>
+      </nav>
+    </div>
+
+    <!-- Kembali box -->
+    <div class="mt-4 bg-emerald-400 rounded-3xl p-5 text-center hidden lg:block">
+      <p class="text-[#1E40AF] font-bold text-sm mb-3">Kembali ke Beranda</p>
+      <a href="index.html"
+         class="inline-flex items-center gap-2 bg-[#1E40AF] text-white text-sm px-5 py-2.5 rounded-2xl font-semibold hover:bg-blue-800 transition">
+        <i class="fas fa-home"></i> Beranda
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── ARTICLE ── -->
+  <main class="space-y-10">
+
+    <!-- A: Pengertian -->
+    <section id="pengertian" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Stabilitas Ekonomi dan Integrasi Bangsa</h2>
+      </div>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Integrasi bangsa Indonesia tidak hanya bergantung pada faktor sosial-politik semata, tetapi juga sangat dipengaruhi
+        oleh ketahanan dan stabilitas ekonomi nasional. Stabilitas ekonomi merujuk pada kondisi sistem ekonomi yang mantap,
+        terprediksi, dan mampu memberikan kepastian bagi semua pelaku ekonomi dari tingkat individu hingga nasional.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        Ketika ekonomi stabil dan rakyat merasakan kesejahteraan yang merata, maka kepercayaan terhadap negara akan meningkat,
+        yang pada gilirannya memperkuat persatuan dan kesatuan. Sebaliknya, ketidakstabilan ekonomi dapat memicu konflik sosial
+        dan mengancam integrasi bangsa.
+      </p>
+
+      <!-- Callout -->
+      <div class="bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl p-6 text-white relative overflow-hidden">
+        <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-white/5"></div>
+        <i class="fas fa-lightbulb text-emerald-300 text-2xl mb-3 block"></i>
+        <p class="italic text-emerald-100 leading-relaxed">
+          Ekonomi yang stabil adalah cerminan dari kepercayaan publik terhadap negara. Ketika nilai mata uang terjaga,
+          harga stabil, dan lapangan kerja terbuka luas, maka setiap warga negara dapat merencanakan masa depan dengan tenang
+          dan fokus pada pembangunan bersama.
+        </p>
+        <p class="text-emerald-300 text-sm mt-3 font-semibold">— Prinsip Dasar Ekonomi Nasional</p>
+      </div>
+    </section>
+
+    <!-- B: Pilar Ekonomi -->
+    <section id="pilar" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">B</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Empat Pilar Stabilitas Ekonomi</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Stabilitas ekonomi dibangun atas empat pilar utama:</p>
+      <div class="space-y-3">
+        <div class="list-item flex items-start gap-4 bg-emerald-50 rounded-2xl p-4 border-l-4 border-emerald-600">
+          <span class="w-7 h-7 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-emerald-600">Konsep Uang</strong> — Uang bukan sekadar alat tukar, melainkan simbol kedaulatan negara yang menyatukan transaksi ekonomi dari Sabang hingga Merauke.</p>
+          </div>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-emerald-50 rounded-2xl p-4 border-l-4 border-emerald-600">
+          <span class="w-7 h-7 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-emerald-600">Peredaran Uang</strong> — Pengaturan jumlah uang yang beredar harus seimbang untuk menghindari inflasi atau deflasi yang merugikan masyarakat.</p>
+          </div>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-emerald-50 rounded-2xl p-4 border-l-4 border-emerald-600">
+          <span class="w-7 h-7 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-emerald-600">Inflasi</strong> — Kenaikan harga yang terukur dan stabil merupakan indikator ekonomi sehat, tetapi inflasi tinggi dapat menggerus daya beli masyarakat.</p>
+          </div>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-emerald-50 rounded-2xl p-4 border-l-4 border-emerald-600">
+          <span class="w-7 h-7 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-emerald-600">Kebijakan Moneter</strong> — Tindakan Bank Indonesia untuk menjaga stabilitas nilai Rupiah melalui pengaturan uang beredar dan suku bunga.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- C: Kaitan dengan Integrasi -->
+    <section id="kaitan" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">C</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Kaitan dengan Integrasi Bangsa</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Stabilitas ekonomi dan integrasi bangsa memiliki hubungan yang sangat erat:</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card-hover bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-shield-halved text-white text-xl"></i>
+          </div>
+          <h3 class="font-bold text-emerald-700 mb-2">Kepercayaan Publik</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">Ketika ekonomi stabil, masyarakat percaya bahwa negara mampu mengelola aset mereka dengan baik, sehingga tumbuh loyalitas dan rasa kebangsaan.</p>
+        </div>
+        <div class="card-hover bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-handshake text-white text-xl"></i>
+          </div>
+          <h3 class="font-bold text-emerald-700 mb-2">Kurangi Ketimpangan</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">Distribusi uang dan kesempatan ekonomi yang merata mencegah kecemburuan sosial antar-daerah dan kelompok masyarakat.</p>
+        </div>
+        <div class="card-hover bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-people-carry-box text-white text-xl"></i>
+          </div>
+          <h3 class="font-bold text-emerald-700 mb-2">Kesejahteraan Bersama</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">Ekonomi yang tumbuh inklusif memastikan semua lapisan masyarakat merasakan manfaat, sehingga menciptakan rasa senasib sepenanggungan.</p>
+        </div>
+        <div class="card-hover bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-chart-line text-white text-xl"></i>
+          </div>
+          <h3 class="font-bold text-emerald-700 mb-2">Pembangunan Berkelanjutan</h3>
+          <p class="text-gray-700 text-sm leading-relaxed">Fondasi ekonomi yang kuat memungkinkan investasi dalam pendidikan, infrastruktur, dan kesehatan untuk semua kelompok masyarakat.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- D: Dampak Konkret -->
+    <section id="dampak" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">D</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Dampak Konkret Ketidakstabilan Ekonomi</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Ketidakstabilan ekonomi memiliki dampak nyata yang dapat mengancam integrasi bangsa:</p>
+      
+      <div class="bg-red-50 rounded-2xl p-6 border-l-4 border-red-400 mb-6">
+        <h3 class="font-bold text-red-700 mb-4 flex items-center gap-2">
+          <i class="fas fa-exclamation-triangle"></i> Contoh: Inflasi Tidak Terkendali
+        </h3>
+        <div class="space-y-3 text-gray-700 text-sm">
+          <p>Inflasi yang tinggi secara langsung menggerus daya beli rakyat karena kenaikan harga barang dan jasa tidak dibarengi peningkatan pendapatan yang setara.</p>
+          <p><strong>Konsekuensi:</strong> Rumah tangga, terutama kelompok menengah ke bawah, terpaksa mengurangi konsumsi dan mengalihkan anggaran untuk kebutuhan pokok yang membengkak.</p>
+          <p><strong>Dampak Integrasi:</strong> Penurunan daya beli menciptakan keresahan sosial, memicu kelesuan ekonomi, dan berisiko menimbulkan ketimpangan sosial yang mengancam stabilitas nasional.</p>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <div class="flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-500 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-red-600">Kemiskinan Meningkat</strong> — Daya beli berkurang membuat lebih banyak orang jatuh miskin atau semakin miskin.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-500 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-red-600">Pengangguran Tinggi</strong> — Usaha kecil dan menengah gulung tikar karena tidak mampu bertahan dengan biaya produksi yang membengkak.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-500 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+          <div>
+            <p class="text-gray-700"><strong class="text-red-600">Kecemburuan Sosial</strong> — Ketimpangan semakin dalam menciptakan rasa tidak adil dan perpecahan antar kelompok.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- E: Menjaga Stabilitas -->
+    <section id="stabilitas" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">E</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Upaya Menjaga Stabilitas Ekonomi</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Stabilitas ekonomi dijaga melalui upaya terkoordinasi dari berbagai pihak:</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card-hover bg-emerald-600 rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-emerald-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-bank text-emerald-600 text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Bank Indonesia</h3>
+          <p class="text-emerald-100 text-sm leading-relaxed">Sebagai bank sentral, BI menjaga stabilitas nilai Rupiah melalui kebijakan moneter yang kredibel dan transparan.</p>
+        </div>
+        <div class="card-hover bg-emerald-600 rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-emerald-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-building text-emerald-600 text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Pemerintah</h3>
+          <p class="text-emerald-100 text-sm leading-relaxed">Melalui kebijakan fiskal yang bijaksana, pengaturan perdagangan, dan investasi dalam sektor strategis.</p>
+        </div>
+        <div class="card-hover bg-emerald-600 rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-emerald-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-handshake text-emerald-600 text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Sektor Swasta</h3>
+          <p class="text-emerald-100 text-sm leading-relaxed">Melalui inovasi, penciptaan lapangan kerja, dan kontribusi pada pertumbuhan ekonomi yang berkelanjutan.</p>
+        </div>
+        <div class="card-hover bg-emerald-600 rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-emerald-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-users text-emerald-600 text-lg"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Masyarakat</h3>
+          <p class="text-emerald-100 text-sm leading-relaxed">Melalui literasi ekonomi, konsumsi bijak, dan partisipasi aktif dalam pembangunan ekonomi lokal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- F: Peran Masyarakat -->
+    <section id="peran" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">F</div>
+        <h2 class="text-2xl font-bold text-emerald-600">Peran Masyarakat dalam Integrasi Ekonomi</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Setiap individu memiliki peran penting dalam menjaga stabilitas ekonomi dan integrasi bangsa:</p>
+      <div class="space-y-3">
+        <div class="card-hover flex items-start gap-4 bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+          <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-graduation-cap text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-700 mb-1">Meningkatkan Literasi Ekonomi</h4>
+            <p class="text-gray-600 text-sm">Memahami konsep uang, inflasi, dan kebijakan moneter membantu masyarakat membuat keputusan finansial yang bijak.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+          <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-piggy-bank text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-700 mb-1">Konsumsi dan Investasi Bijak</h4>
+            <p class="text-gray-600 text-sm">Mengelola keuangan pribadi dengan baik mencegah pemborosan dan mendukung pertumbuhan ekonomi yang sehat.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+          <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-briefcase text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-700 mb-1">Mendukung UMKM Lokal</h4>
+            <p class="text-gray-600 text-sm">Membeli produk lokal dan mendukung usaha kecil menengah memperkuat ekonomi komunitas dan menciptakan lapangan kerja.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+          <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-handshake text-white"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-700 mb-1">Kerja Sama Ekonomi Lintas Suku</h4>
+            <p class="text-gray-600 text-sm">Kolaborasi dagang dan bisnis tanpa diskriminasi menciptakan ikatan ekonomi yang kuat antar kelompok masyarakat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- G: Kesimpulan -->
+    <section id="kesimpulan" class="reveal bg-gradient-to-r from-emerald-600 to-teal-600 rounded-3xl shadow-md p-8 md:p-10 text-white">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-emerald-300 rounded-2xl flex items-center justify-center text-emerald-700 font-bold flex-shrink-0">G</div>
+        <h2 class="text-2xl font-bold text-white">Kesimpulan</h2>
+      </div>
+      <p class="text-emerald-100 leading-relaxed text-lg mb-6">
+        Integrasi bangsa Indonesia secara fundamental bergantung pada stabilitas dan literasi ekonomi. Memahami konsep uang,
+        pengendalian peredaran uang, manajemen inflasi, serta kebijakan moneter yang efektif menjadi pilar utama dalam menjaga
+        kepercayaan publik terhadap negara. Keterkaitan antara stabilitas harga dan daya beli masyarakat bukan sekadar isu
+        finansial, melainkan instrumen strategis untuk mencegah ketimpangan sosial dan potensi disintegrasi nasional.
+      </p>
+      <p class="text-emerald-100 leading-relaxed text-lg mb-8">
+        Setiap individu, baik sebagai konsumen, pengusaha, maupun warga negara, memiliki tanggung jawab untuk memahami dan
+        menjaga stabilitas ekonomi. Dengan adanya literasi ekonomi yang merata di seluruh lapisan masyarakat, diharapkan dapat
+        tercipta rasa <strong class="text-emerald-300">senasib sepenanggungan</strong> yang kuat, persatuan yang kokoh, dan
+        akhirnya pembangunan ekonomi yang <strong class="text-emerald-300">inklusif, tangguh, dan berkelanjutan</strong>.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="index.html#quiz"
+           class="bg-emerald-300 hover:bg-emerald-200 text-emerald-700 px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2">
+          <i class="fas fa-brain"></i> Uji Pemahamanmu
+        </a>
+        <a href="index.html"
+           class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-2xl font-semibold transition flex items-center gap-2 border border-white/20">
+          <i class="fas fa-home"></i> Kembali ke Beranda
+        </a>
+      </div>
+    </section>
+
+    <!-- Daftar Pustaka -->
+    <section id="referensi" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-gray-700 rounded-2xl flex items-center justify-center text-white flex-shrink-0">
+          <i class="fas fa-book"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800">Daftar Pustaka</h2>
+      </div>
+      <ul class="space-y-3 text-gray-600">
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-emerald-500 mt-1 flex-shrink-0"></i>
+          <span>Bank Indonesia. <em>Laporan Kebijakan Moneter dan Inflasi 2023.</em> Jakarta: Bank Indonesia.</span>
+        </li>
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-emerald-500 mt-1 flex-shrink-0"></i>
+          <span>Kementerian Keuangan RI. <em>Strategi Literasi Keuangan Nasional 2023-2028.</em> Jakarta: Kemenkeu.</span>
+        </li>
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-emerald-500 mt-1 flex-shrink-0"></i>
+          <span>Mankiw, N. Gregory. <em>Principles of Economics.</em> Cengage Learning.</span>
+        </li>
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-emerald-500 mt-1 flex-shrink-0"></i>
+          <span>Kementerian Pendidikan dan Kebudayaan RI. <em>Buku Ekonomi SMA/MA Kelas X-XII.</em></span>
+        </li>
+        <li class="flex items-start gap-3 py-3">
+          <i class="fas fa-minus text-emerald-500 mt-1 flex-shrink-0"></i>
+          <span>Subroto, Ignatius. <em>Ekonomi Politik dan Integrasi Sosial Indonesia.</em> Jakarta: Kompas Media.</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="bg-[#1E40AF] text-white text-center py-8 mt-8">
+  <p class="text-blue-200 text-sm">
+    © 2024 Integrasi Bangsa · Harmoni dalam Keberagaman
+  </p>
+</footer>
+
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active TOC highlight
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    tocLinks.forEach(a => {
+      a.classList.remove('text-emerald-600', 'font-semibold', 'border-emerald-400');
+      a.classList.add('text-gray-600', 'border-transparent');
+      if (a.getAttribute('href') === '#' + current) {
+        a.classList.add('text-emerald-600', 'font-semibold', 'border-emerald-400');
+        a.classList.remove('text-gray-600', 'border-transparent');
+      }
+    });
+  });
+</script>
 </body>
 </html>
