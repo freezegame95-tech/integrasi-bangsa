@@ -45,34 +45,84 @@
     }
     #chat-fab { animation: pulse-ring 2.5s ease-out infinite; }
     #chat-fab:hover { animation: none; transform: scale(1.1); }
+
+
+  /* Instagram Gradient Button (Official Instagram Colors) */
+  .instagram-btn {
+    background: linear-gradient(135deg, 
+      #feda75 0%, 
+      #fa7e1e 25%,
+      #d92e7f 50%,
+      #9b36b7 75%,
+      #515bd4 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .instagram-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+      #feda75 0%, 
+      #fa7e1e 25%,
+      #d92e7f 50%,
+      #9b36b7 75%,
+      #515bd4 100%);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  
+  .instagram-btn:hover::before {
+    opacity: 0.2;
+  }
+  
+  .instagram-btn:hover {
+    transform: scale(1.05);
+  }
   </style>
 </head>
 
 <body class="bg-gray-50 font-sans">
 
-  <!-- ═══ NAVBAR ═══ -->
-  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
-        <div>
-          <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
-          <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
-        </div>
+ <!-- ═══ NAVBAR ═══ -->
+<nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
+      <div>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+        <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
       </div>
-      <div class="hidden md:flex gap-8 text-lg">
-        <a href="#penjelasan" class="hover:text-yellow-300 transition">Penjelasan</a>
-        <a href="#quiz"       class="hover:text-yellow-300 transition">Quiz</a>
-        <a href="games.html"  class="hover:text-yellow-300 transition">Games</a>
-        <a href="#video"      class="hover:text-yellow-300 transition">Video</a>
-        <a href="#saran"      class="hover:text-yellow-300 transition">Kotak Saran</a>
-      </div>
+    </div>
+    <div class="hidden md:flex gap-8 text-lg">
+      <a href="#penjelasan" class="hover:text-yellow-300 transition">Penjelasan</a>
+      <a href="#quiz"       class="hover:text-yellow-300 transition">Quiz</a>
+      <a href="games.html"  class="hover:text-yellow-300 transition">Games</a>
+      <a href="#video"      class="hover:text-yellow-300 transition">Video</a>
+      <a href="#saran"      class="hover:text-yellow-300 transition">Kotak Saran</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <!-- Instagram Button with Gradient -->
+      <a href="https://www.instagram.com/birusatu.rj/" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="instagram-btn text-white p-3 rounded-2xl font-semibold flex items-center justify-center transition shadow-lg hover:shadow-2xl"
+         title="Kunjungi Instagram">
+        <i class="fab fa-instagram text-xl"></i>
+      </a>
+      
+      <!-- Diskusi AI Button -->
       <button onclick="toggleChat()"
               class="bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
         <i class="fas fa-robot"></i> Diskusi AI
       </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- ═══ HERO ═══ -->
 <section class="relative h-screen flex items-center text-white overflow-hidden">
@@ -127,7 +177,7 @@
       </div>
       <div class="mt-16 flex justify-center">
         <a href="article2.html" class="inline-flex items-center gap-3 bg-[#1E40AF] hover:bg-blue-800 text-white px-10 py-5 rounded-2xl font-semibold text-lg transition shadow-lg">
-          <i class="fas fa-book-open"></i> Baca Artikel Lengkap tentang Ekonomi
+          <i class="fas fa-book-open"></i> Baca Artikel Lengkap tentang Materi Ekonomi
         </a>
       </div>
     </div>
