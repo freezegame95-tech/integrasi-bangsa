@@ -3,68 +3,440 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Artikel - Integrasi Bangsa</title>
+  <title>Integrasi Sosial — Artikel Lengkap</title>
+  <link rel="icon" type="image/png" href="logobiru.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png">
-
   <style>
-    .hero-bg {
-      background: linear-gradient(rgba(30,64,175,0.8), rgba(30,64,175,0.9)), 
-                  url('https://source.unsplash.com/random/1920x1080/?indonesia') center/cover no-repeat;
+    html { scroll-behavior: smooth; }
+
+    /* Progress bar */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      background: #fde047;
+      width: 0%;
+      z-index: 9999;
+      transition: width .1s linear;
+      border-radius: 0 4px 4px 0;
     }
-    .article-content img {
-      border-radius: 16px;
+
+    /* Fade-up on load */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .fade-up-2 { animation: fadeUp .6s .15s ease both; }
+    .fade-up-3 { animation: fadeUp .6s .3s ease both; }
+
+    /* Section reveal via IntersectionObserver */
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* Hover lift cards */
+    .card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(30,64,175,.15); }
+
+    /* List item hover */
+    .list-item { transition: border-color .2s, transform .2s; }
+    .list-item:hover { border-left-color: #fde047; transform: translateX(4px); }
+
+    /* TOC link */
+    .toc-link { transition: color .15s, padding-left .15s; }
+    .toc-link:hover { color: #fde047; padding-left: 6px; }
+
+    /* Sticky TOC sidebar */
+    @media (min-width: 1024px) {
+      .sidebar { position: sticky; top: 88px; }
     }
   </style>
 </head>
 <body class="bg-gray-50 font-sans">
 
-  <!-- Navbar -->
-  <nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-3">
-        <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
-        <div>
-          <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
-          <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
-        </div>
-      </div>
-      <div class="flex gap-6 text-lg">
-        <a href="index.html" class="hover:text-yellow-300 transition">🏠 Beranda</a>
-        <a href="games.html" class="hover:text-yellow-300 transition">Games</a>
-        <a href="#" class="text-yellow-300 font-semibold">Artikel</a>
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- ═══════════════════════ NAVBAR (sama persis dengan index.html) ═══════════════════════ -->
+<nav class="bg-[#1E40AF] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <img src="logobiru.png" alt="Logo" class="h-12 w-auto object-contain">
+      <div>
+        <h1 class="text-2xl font-bold">Integrasi Bangsa</h1>
+        <p class="text-xs -mt-1 text-yellow-300">Harmoni dalam Keberagaman</p>
       </div>
     </div>
-  </nav>
-
-  <!-- Hero Article -->
-  <section class="hero-bg h-[420px] flex items-center text-white">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h1 id="article-title" class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        INTEGRASI SOSIAL DALAM KEHIDUPAN MASYARAKAT MODERN
-      </h1>
+    <div class="hidden md:flex gap-8 text-lg">
+      <a href="index.html#penjelasan" class="hover:text-yellow-300 transition">Penjelasan</a>
+      <a href="index.html#quiz"       class="hover:text-yellow-300 transition">Quiz</a>
+      <a href="games.html"            class="hover:text-yellow-300 transition">Games</a>
+      <a href="index.html#video"      class="hover:text-yellow-300 transition">Video</a>
+      <a href="index.html#saran"      class="hover:text-yellow-300 transition">Kotak Saran</a>
     </div>
-  </section>
+    <a href="index.html"
+       class="bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-6 py-3 rounded-2xl font-semibold flex items-center gap-2 transition">
+      <i class="fas fa-arrow-left"></i> Kembali
+    </a>
+  </div>
+</nav>
 
-  <!-- Article Content -->
-  <div class="max-w-4xl mx-auto px-6 py-16">
-    <div id="article-content" class="article-content prose prose-lg max-w-none text-gray-700 leading-relaxed">
-      <!-- Isi artikel akan dimasukkan di sini melalui JavaScript atau secara manual -->
-        <h2>A. Pengertian Integrasi Sosial </h2>
-            <p>Integrasi sosial merupakan proses penyesuaian di antara unsur-unsur yang berbeda dalam masyarakat sehingga tercipta keserasian dan keharmonisan dalam kehidupan bersama. Perbedaan tersebut dapat berupa suku, agama, ras, budaya, maupun latar belakang sosial-ekonomi. Integrasi sosial sangat penting untuk menjaga stabilitas dan mencegah konflik dalam masyarakat yang majemuk.</p>
-    </div>
+<!-- ═══════════════════════ HERO BANNER ═══════════════════════ -->
+<section class="bg-[#1E40AF] text-white py-20 px-6 relative overflow-hidden">
+  <!-- Decorative circles -->
+  <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-white/5 pointer-events-none"></div>
+  <div class="absolute -bottom-20 -left-10 w-56 h-56 rounded-full bg-yellow-300/10 pointer-events-none"></div>
 
-    <div class="mt-16 flex justify-center">
-      <a href="index.html" 
-         class="flex items-center gap-2 text-[#1E40AF] hover:text-blue-700 font-medium">
-        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
-      </a>
+  <div class="max-w-4xl mx-auto text-center relative fade-up">
+    <span class="inline-block bg-yellow-300 text-[#1E40AF] text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6 fade-up">
+      Artikel Ilmiah · Sosiologi
+    </span>
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6 fade-up-2">
+      Integrasi Sosial dalam<br>
+      <span class="text-yellow-300">Kehidupan Masyarakat Modern</span>
+    </h1>
+    <div class="flex justify-center gap-6 text-sm text-blue-200 flex-wrap fade-up-3">
+      <span class="flex items-center gap-2"><i class="fas fa-book-open"></i> Artikel Edukasi</span>
+      <span class="flex items-center gap-2"><i class="fas fa-tag"></i> Integrasi Bangsa</span>
+      <span class="flex items-center gap-2"><i class="fas fa-clock"></i> ±7 menit baca</span>
     </div>
   </div>
+</section>
 
-  <script src="script.js"></script>
+<!-- ═══════════════════════ MAIN LAYOUT ═══════════════════════ -->
+<div class="max-w-7xl mx-auto px-6 py-12 lg:grid lg:grid-cols-[260px_1fr] lg:gap-12 lg:items-start">
+
+  <!-- ── SIDEBAR TOC ── -->
+  <aside class="sidebar mb-10 lg:mb-0">
+    <div class="bg-white rounded-3xl shadow-md p-6 border border-gray-100">
+      <h2 class="text-xs font-bold uppercase tracking-widest text-[#1E40AF] mb-4 flex items-center gap-2">
+        <i class="fas fa-list"></i> Daftar Isi
+      </h2>
+      <nav class="space-y-1 text-sm">
+        <a href="#pengertian"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">A. Pengertian</a>
+        <a href="#pendorong"   class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">B. Faktor Pendorong</a>
+        <a href="#penghambat"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">C. Faktor Penghambat</a>
+        <a href="#bentuk"      class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">D. Bentuk-Bentuk</a>
+        <a href="#contoh"      class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">E. Contoh Kehidupan</a>
+        <a href="#pentingnya"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">F. Pentingnya</a>
+        <a href="#kesimpulan"  class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">G. Kesimpulan</a>
+        <a href="#referensi"   class="toc-link flex items-center gap-2 text-gray-600 py-1.5 border-l-2 border-transparent pl-3">Daftar Pustaka</a>
+      </nav>
+    </div>
+
+    <!-- Kembali box -->
+    <div class="mt-4 bg-yellow-300 rounded-3xl p-5 text-center hidden lg:block">
+      <p class="text-[#1E40AF] font-bold text-sm mb-3">Kembali ke Beranda</p>
+      <a href="index.html"
+         class="inline-flex items-center gap-2 bg-[#1E40AF] text-white text-sm px-5 py-2.5 rounded-2xl font-semibold hover:bg-blue-800 transition">
+        <i class="fas fa-home"></i> Beranda
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── ARTICLE ── -->
+  <main class="space-y-10">
+
+    <!-- A: Pengertian -->
+    <section id="pengertian" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-[#1E40AF] rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">A</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Pengertian Integrasi Sosial</h2>
+      </div>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Integrasi sosial merupakan proses penyesuaian di antara unsur-unsur yang berbeda dalam masyarakat
+        sehingga tercipta keserasian dan keharmonisan dalam kehidupan bersama. Perbedaan tersebut dapat
+        berupa suku, agama, ras, budaya, maupun latar belakang sosial-ekonomi.
+      </p>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        Integrasi sosial sangat penting untuk menjaga stabilitas dan mencegah konflik dalam masyarakat
+        yang majemuk seperti Indonesia yang terdiri dari ratusan suku, bahasa, dan kepercayaan.
+      </p>
+
+      <!-- Callout -->
+      <div class="bg-[#1E40AF] rounded-2xl p-6 text-white relative overflow-hidden">
+        <div class="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-white/5"></div>
+        <i class="fas fa-quote-left text-yellow-300 text-2xl mb-3 block"></i>
+        <p class="italic text-blue-100 leading-relaxed">
+          Integrasi sosial adalah proses di mana kelompok-kelompok yang berbeda bersatu dalam satu
+          sistem sosial yang harmonis — bukan dengan menghapus perbedaan, melainkan dengan merayakannya.
+        </p>
+        <p class="text-yellow-300 text-sm mt-3 font-semibold">— Soekanto, Sosiologi Suatu Pengantar</p>
+      </div>
+    </section>
+
+    <!-- B: Faktor Pendorong -->
+    <section id="pendorong" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-[#1E40AF] rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">B</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Faktor Pendorong Integrasi Sosial</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Beberapa faktor yang mendorong terjadinya integrasi sosial antara lain:</p>
+      <div class="space-y-3">
+        <!-- list item template -->
+        <div class="list-item flex items-start gap-4 bg-gray-50 rounded-2xl p-4 border-l-4 border-[#1E40AF]">
+          <span class="w-7 h-7 bg-[#1E40AF] text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+          <p class="text-gray-700"><strong class="text-[#1E40AF]">Toleransi</strong> — sikap saling menghargai perbedaan antar individu dan kelompok dalam masyarakat.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-gray-50 rounded-2xl p-4 border-l-4 border-[#1E40AF]">
+          <span class="w-7 h-7 bg-[#1E40AF] text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+          <p class="text-gray-700"><strong class="text-[#1E40AF]">Kesempatan yang sama</strong> dalam bidang ekonomi bagi seluruh lapisan masyarakat.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-gray-50 rounded-2xl p-4 border-l-4 border-[#1E40AF]">
+          <span class="w-7 h-7 bg-[#1E40AF] text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+          <p class="text-gray-700"><strong class="text-[#1E40AF]">Sikap terbuka</strong> dari golongan yang berkuasa terhadap perubahan dan keberagaman.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-gray-50 rounded-2xl p-4 border-l-4 border-[#1E40AF]">
+          <span class="w-7 h-7 bg-[#1E40AF] text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+          <p class="text-gray-700"><strong class="text-[#1E40AF]">Persamaan dalam unsur kebudayaan</strong> yang menjadi titik temu antar kelompok.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-gray-50 rounded-2xl p-4 border-l-4 border-[#1E40AF]">
+          <span class="w-7 h-7 bg-[#1E40AF] text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">5</span>
+          <p class="text-gray-700"><strong class="text-[#1E40AF]">Adanya ancaman dari luar</strong> yang secara alami mendorong persatuan dan solidaritas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- C: Faktor Penghambat -->
+    <section id="penghambat" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">C</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Faktor Penghambat Integrasi Sosial</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Faktor-faktor yang dapat menghambat integrasi sosial meliputi:</p>
+      <div class="space-y-3">
+        <div class="list-item flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-400 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+          <p class="text-gray-700"><strong class="text-red-600">Kurangnya toleransi</strong> terhadap perbedaan budaya, agama, dan suku bangsa.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-400 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+          <p class="text-gray-700"><strong class="text-red-600">Prasangka dan diskriminasi</strong> yang melahirkan jarak sosial antar kelompok.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-400 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+          <p class="text-gray-700"><strong class="text-red-600">Ketimpangan sosial dan ekonomi</strong> yang menciptakan kecemburuan dan ketidakpuasan.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-400 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+          <p class="text-gray-700"><strong class="text-red-600">Kurangnya komunikasi</strong> antar kelompok yang memperbesar kesalahpahaman.</p>
+        </div>
+        <div class="list-item flex items-start gap-4 bg-red-50 rounded-2xl p-4 border-l-4 border-red-400">
+          <span class="w-7 h-7 bg-red-400 text-white rounded-xl flex items-center justify-center font-bold text-sm flex-shrink-0">5</span>
+          <p class="text-gray-700"><strong class="text-red-600">Sikap eksklusif</strong> dalam masyarakat yang menutup diri dari kelompok lain.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- D: Bentuk -->
+    <section id="bentuk" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-[#1E40AF] rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">D</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Bentuk-Bentuk Integrasi Sosial</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Integrasi sosial dapat terwujud dalam tiga bentuk utama:</p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="card-hover bg-[#1E40AF] rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-yellow-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-scroll text-[#1E40AF]"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Integrasi Normatif</h3>
+          <p class="text-blue-200 text-sm leading-relaxed">Terbentuk karena adanya norma dan nilai yang disepakati bersama oleh seluruh anggota masyarakat.</p>
+        </div>
+        <div class="card-hover bg-[#1E40AF] rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-yellow-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-link text-[#1E40AF]"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Integrasi Fungsional</h3>
+          <p class="text-blue-200 text-sm leading-relaxed">Terjadi karena adanya ketergantungan antarindividu atau kelompok yang saling membutuhkan.</p>
+        </div>
+        <div class="card-hover bg-[#1E40AF] rounded-2xl p-6 text-white">
+          <div class="w-10 h-10 bg-yellow-300 rounded-xl flex items-center justify-center mb-4">
+            <i class="fas fa-gavel text-[#1E40AF]"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Integrasi Koersif</h3>
+          <p class="text-blue-200 text-sm leading-relaxed">Terbentuk karena adanya kekuasaan atau paksaan dari pihak yang berwenang.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- E: Contoh -->
+    <section id="contoh" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-[#1E40AF] rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">E</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Contoh Integrasi Sosial dalam Kehidupan Sehari-hari</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Integrasi sosial hadir nyata dalam kehidupan kita sehari-hari:</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card-hover flex items-start gap-4 bg-blue-50 rounded-2xl p-5 border border-blue-100">
+          <div class="w-10 h-10 bg-[#1E40AF] rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-people-carry-box text-yellow-300"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-[#1E40AF] mb-1">Kerja Bakti</h4>
+            <p class="text-gray-600 text-sm">Wujud gotong royong tanpa memandang perbedaan suku dan agama.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-blue-50 rounded-2xl p-5 border border-blue-100">
+          <div class="w-10 h-10 bg-[#1E40AF] rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-hands-praying text-yellow-300"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-[#1E40AF] mb-1">Toleransi Beragama</h4>
+            <p class="text-gray-600 text-sm">Saling menghormati antar umat beragama dalam perayaan hari besar.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-blue-50 rounded-2xl p-5 border border-blue-100">
+          <div class="w-10 h-10 bg-[#1E40AF] rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-store text-yellow-300"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-[#1E40AF] mb-1">Kerja Sama Ekonomi</h4>
+            <p class="text-gray-600 text-sm">Kerja sama antar suku dalam kegiatan pasar tradisional dan koperasi.</p>
+          </div>
+        </div>
+        <div class="card-hover flex items-start gap-4 bg-blue-50 rounded-2xl p-5 border border-blue-100">
+          <div class="w-10 h-10 bg-[#1E40AF] rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-comments text-yellow-300"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-[#1E40AF] mb-1">Musyawarah</h4>
+            <p class="text-gray-600 text-sm">Cara menyelesaikan konflik secara damai dan demokratis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- F: Pentingnya -->
+    <section id="pentingnya" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-[#1E40AF] rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0">F</div>
+        <h2 class="text-2xl font-bold text-[#1E40AF]">Pentingnya Integrasi Sosial</h2>
+      </div>
+      <p class="text-gray-700 leading-relaxed mb-6">Integrasi sosial membawa dampak nyata bagi keberlangsungan kehidupan berbangsa:</p>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card-hover bg-gray-50 rounded-2xl p-5 border-t-4 border-[#1E40AF]">
+          <i class="fas fa-shield-halved text-2xl text-[#1E40AF] mb-3"></i>
+          <h4 class="font-bold text-gray-800 mb-1">Stabilitas Sosial</h4>
+          <p class="text-gray-600 text-sm">Menciptakan ketertiban dan ketenteraman dalam kehidupan bermasyarakat.</p>
+        </div>
+        <div class="card-hover bg-gray-50 rounded-2xl p-5 border-t-4 border-[#1E40AF]">
+          <i class="fas fa-handshake text-2xl text-[#1E40AF] mb-3"></i>
+          <h4 class="font-bold text-gray-800 mb-1">Kurangi Konflik</h4>
+          <p class="text-gray-600 text-sm">Mengurangi potensi perpecahan dan gesekan antar kelompok masyarakat.</p>
+        </div>
+        <div class="card-hover bg-gray-50 rounded-2xl p-5 border-t-4 border-yellow-400">
+          <i class="fas fa-flag text-2xl text-yellow-500 mb-3"></i>
+          <h4 class="font-bold text-gray-800 mb-1">Perkuat Persatuan</h4>
+          <p class="text-gray-600 text-sm">Memperkuat rasa kebangsaan dan kesatuan Negara Kesatuan RI.</p>
+        </div>
+        <div class="card-hover bg-gray-50 rounded-2xl p-5 border-t-4 border-yellow-400">
+          <i class="fas fa-chart-line text-2xl text-yellow-500 mb-3"></i>
+          <h4 class="font-bold text-gray-800 mb-1">Pembangunan Nasional</h4>
+          <p class="text-gray-600 text-sm">Mendukung terwujudnya pembangunan yang merata dan berkeadilan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- G: Kesimpulan -->
+    <section id="kesimpulan" class="reveal bg-[#1E40AF] rounded-3xl shadow-md p-8 md:p-10 text-white">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-yellow-300 rounded-2xl flex items-center justify-center text-[#1E40AF] font-bold flex-shrink-0">G</div>
+        <h2 class="text-2xl font-bold text-white">Kesimpulan</h2>
+      </div>
+      <p class="text-blue-100 leading-relaxed text-lg">
+        Integrasi sosial merupakan fondasi penting dalam kehidupan masyarakat yang beragam.
+        Dengan adanya integrasi, perbedaan dapat menjadi kekuatan untuk membangun kehidupan
+        yang harmonis. Oleh karena itu, setiap individu perlu menjunjung tinggi nilai
+        <strong class="text-yellow-300">toleransi</strong>,
+        <strong class="text-yellow-300">saling menghargai</strong>, dan
+        <strong class="text-yellow-300">kerja sama</strong>
+        demi terwujudnya masyarakat yang bersatu dalam keberagaman.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="index.html#quiz"
+           class="bg-yellow-300 hover:bg-yellow-400 text-[#1E40AF] px-6 py-3 rounded-2xl font-bold transition flex items-center gap-2">
+          <i class="fas fa-brain"></i> Uji Pemahamanmu
+        </a>
+        <a href="index.html"
+           class="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-2xl font-semibold transition flex items-center gap-2 border border-white/20">
+          <i class="fas fa-home"></i> Kembali ke Beranda
+        </a>
+      </div>
+    </section>
+
+    <!-- Daftar Pustaka -->
+    <section id="referensi" class="reveal bg-white rounded-3xl shadow-md p-8 md:p-10">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-10 h-10 bg-gray-700 rounded-2xl flex items-center justify-center text-white flex-shrink-0">
+          <i class="fas fa-book"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800">Daftar Pustaka</h2>
+      </div>
+      <ul class="space-y-3 text-gray-600">
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-yellow-400 mt-1 flex-shrink-0"></i>
+          <span>Soekanto, Soerjono. <em>Sosiologi Suatu Pengantar.</em> Jakarta: Rajawali Pers.</span>
+        </li>
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-yellow-400 mt-1 flex-shrink-0"></i>
+          <span>Koentjaraningrat. <em>Pengantar Ilmu Antropologi.</em> Jakarta: Rineka Cipta.</span>
+        </li>
+        <li class="flex items-start gap-3 py-3 border-b border-gray-100">
+          <i class="fas fa-minus text-yellow-400 mt-1 flex-shrink-0"></i>
+          <span>Kementerian Pendidikan dan Kebudayaan RI. <em>Buku Sosiologi SMA/MA Kelas XI.</em></span>
+        </li>
+        <li class="flex items-start gap-3 py-3">
+          <i class="fas fa-minus text-yellow-400 mt-1 flex-shrink-0"></i>
+          <span>Horton, Paul B. &amp; Hunt, Chester L. <em>Sociology.</em> McGraw-Hill.</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="bg-[#1E40AF] text-white text-center py-8 mt-8">
+  <p class="text-blue-200 text-sm">
+    © 2024 Integrasi Bangsa · Harmoni dalam Keberagaman
+  </p>
+</footer>
+
+<script>
+  // Reading progress bar
+  window.addEventListener('scroll', () => {
+    const total = document.body.scrollHeight - window.innerHeight;
+    const pct = total > 0 ? (window.scrollY / total) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Active TOC highlight
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('.toc-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    tocLinks.forEach(a => {
+      a.classList.remove('text-[#1E40AF]', 'font-semibold', 'border-yellow-400');
+      a.classList.add('text-gray-600', 'border-transparent');
+      if (a.getAttribute('href') === '#' + current) {
+        a.classList.add('text-[#1E40AF]', 'font-semibold', 'border-yellow-400');
+        a.classList.remove('text-gray-600', 'border-transparent');
+      }
+    });
+  });
+</script>
 </body>
 </html>
